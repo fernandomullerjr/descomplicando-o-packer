@@ -3,8 +3,6 @@
 
 # Aula - Descomplicando o Packer
 
-<<<<<<< HEAD
-=======
 # Instalando o Packer
 ~~~bash
 sudo apt-get update
@@ -12,7 +10,6 @@ sudo apt-get -y install packer
 ~~~
 
 
->>>>>>> build-final
 - A idéia é termos o nosso próprio repositório para imagens, para evitar a quebra do Pipeline por motivos externos.
 
 
@@ -114,10 +111,6 @@ Normalmente as releases tem um ponto no nome, então este replace é muito útil
 
 - Continuando em 31:05m
 
-<<<<<<< HEAD
-=======
-
->>>>>>> build-final
 # Definindo o source_ami_filter
 
 - O "source_ami_filter" ajuda a buscar a imagem mais recente, sem precisar estar passando o id da ami, que é trabalhoso de estar procurando.
