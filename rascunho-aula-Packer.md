@@ -52,11 +52,7 @@ var.release != ""   [se a variável release for diferente de 0 ou nulo]
 - Página com exemplos, que podem ajudar:
     https://www.packer.io/plugins/builders/amazon/ebs
 
-<<<<<<< HEAD
-- v1
-=======
 - Script descomplicando-o-packer/build.pkr.hcl:
->>>>>>> build-final
 ~~~hcl
 locals {
     release = var.release != "" ? var.release : formatdate("YYYYMMDDhhmmss", timestamp())
