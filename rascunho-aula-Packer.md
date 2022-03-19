@@ -199,10 +199,6 @@ variable "release" {
 }
 ~~~
 
-<<<<<<< HEAD
-- Executar o comando "packer init" para iniciar o projeto:
-packer init
-=======
 - Executar o comando "packer init ." para iniciar o projeto:
 packer init .
 ~~~bash
@@ -1226,4 +1222,3 @@ Note: You didn't use the -out option to save this plan, so Terraform can't guara
 fernando@debian10x64:~/cursos/packer/descomplicando-o-packer/terraform$
 
 ~~~
->>>>>>> build-final
