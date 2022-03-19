@@ -18,4 +18,26 @@ source "amazon-ebs" "example" {
         Extra   =   "{{ .SourceAMITags.TagName }}"
         Product = "Base"
     }
+
+    source_ami_filter {
+        filters = {
+        name = "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-arm64-server-*"
+        root-device-type = "ebs"
+        virtualization-type = "hvm"
+        }
+        owners = ["099720109477"]
+        most_recent = true
+    }
+
+    build {
+    sources = ["source.amazon-ebs.example"]
+    provisioner "shell" {
+        inline = [
+            "echo Connected via SSM at '${build.User}@${build.Host}:${build.Port}'",
+            "echo provisioning all the things",
+            "echo 'foo' > /tmp/teste",
+        ]
+    }
+    }
 }
+

@@ -100,8 +100,6 @@ Normalmente as releases tem um ponto no nome, então este replace é muito útil
 
 - Continuando em 31:05m
 
-# Definindo o source_ami_filter
-
 - O "source_ami_filter" ajuda a buscar a imagem mais recente, sem precisar estar passando o id da ami, que é trabalhoso de estar procurando.
 
 - Nosso bloco de código do "source_ami_filter" ficará assim:
@@ -144,42 +142,3 @@ fernando@debian10x64:~/cursos/packer/descomplicando-o-packer$
 ~~~
 
 
-
-
-# Definindo o build
-
-- No bloco do build apontamos para o source que iremos usar.
-- Definimos um provisioner(pode ser Shell, Ansible, etc)
-- Os provisionadores rodam na ordem que são declarados.
-~~~hcl
-    build {
-    sources = ["source.amazon-ebs.example"]
-    provisioner "shell" {
-        inline = [
-            "echo Connected via SSM at '${build.User}@${build.Host}:${build.Port}'",
-            "echo provisioning all the things",
-            "echo 'foo' > /tmp/teste",
-        ]
-    }
-    }
-~~~
-
-
-
-
-
-# Variaveis
-
-- Criar um arquivo chamado "variables.pkr.hcl"
-- É possível adicionar o parametro "sensitive = true", para deixar a variável "escondida" e não aparecer o valor secreto dela durante o build.
-- Não vamos definir um valor para a variável "release", pois é interessante que ele seja sempre informado via Pipeline, caso contrário, o Pipeline não deve avançar/deve quebrar.
-~~~hcl
-variable "release" {
-  type = string
-  #default = "v0.7.1" 
-  # não é o ideal fixar a versão na variável release, pois ela sempre precisa ser informada.
-}
-~~~
-
-- Executar o comando "packer init" para iniciar o projeto:
-packer init
