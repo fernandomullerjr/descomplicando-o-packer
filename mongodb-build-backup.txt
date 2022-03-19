@@ -1,0 +1,33 @@
+locals { timestamp = regex_replace(timestamp(), "[- TZ:]", "") }
+
+# We're creating an image backed by amazon ebs
+source "amazon-ebs" "mongodb" {
+
+  ami_name      = "mongodb-packer-image-${local.timestamp}" # This will be the AMI name in AWS
+  instance_type = "t3.micro"
+  region        = "us-east-1"
+
+  source_ami_filter {
+    filters = {
+      name                = "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"
+      root-device-type    = "ebs"
+      virtualization-type = "hvm"
+    }
+    most_recent = true
+    owners      = ["099720109477"]
+  }
+  ssh_username = "ubuntu"
+}
+
+# a build block invokes sources and runs provisioning steps on them.
+build {
+  sources = ["source.amazon-ebs.mongodb"]
+
+  provisioner "shell" {
+    script = "./scripts/apt_upgrade.sh"
+  }
+
+  provisioner "shell" {
+    script = "./scripts/install_mongo.sh"
+  }
+}
